@@ -9,17 +9,14 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-stages:
-  stage:
-  - jobs:
-    -job:
-      pool:
-        vmImage: "Ubuntu 16.04"
-
-
-
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+steps:
+- task: Maven@3
+  inputs:
+     mavenPomFile: 'pom.xml'
+     mavenOptions: '-Xmx3072m'
+     javaHomeOption: 'JDKVersion'
+     jdkVersionOption: '1.11'
+     jdkArchitectureOption: 'x64'
+     publishJUnitResults: false
+     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+     goals: 'package'
