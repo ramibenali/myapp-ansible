@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- getPackage: mvn
+- getPackage: maven
 
 
 - script: |
